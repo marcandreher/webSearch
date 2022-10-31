@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>SERP</title>
+  <meta name="description" value="The search engine that doesn't track you. Learn More.">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <meta name="author" value="vanGato">
+</head>
+
+<body>
+  <div class="serp">
+    <div class="serp__layout">
+      <div class="serp__header">
+        <div class="serp__search">
+          <form class="serp__form" action="##" methode="GET">
+            <div>
+              <input name="q" type="search" <#if query??>value="${query}"<#else>value=""</#if>
+                class="serp__query"
+                maxlength="512"
+                autocomplete="off"
+                title="Search"
+                aria-label="Search"
+                dir="ltr"
+                spellcheck="false"
+                autofocus="autofocus"
+                >
+            </div>
+            <button class="serp__button" aria-label="Search" type="submit">
+              <div class="serp__ico"></div>
+            </button>
+          </form>
+        </div>
+        <a class="serp__logo" href="/"></a>
+        <ul class="serp__nav">
+          <li class="serp__active"><a href="##">Web</a></li>
+          <#if query??>
+            <li><a href="/img?q=${query}">Images</a></li>
+            <#else>
+              <li><a href="/img">Images</a></li>
+          </#if>
+          <li><a href="##">Videos</a></li>
+          <li><a href="##">News</a></li>
+        </ul>
+      </div>
+    </div>
+    <#if eg??>
+      <div>
+        <p class="resultInt">Found ${allQueries} queries on ${pages} pages</p>
+      </div>
+    </#if>
+    <div class="serp__body">
+      <#if eg??>
+        <div class="serp__main serp__results">
+          <div class="serp__web">
+            <span class="serp__label">Web Results</span>
+            <section class="image-grid">
+              <#list eg>
+                <#items as query>
+                  <div class="serp__result">
+                    <a href="https://${query.domain}" target="_blank">
+                      <div class="serp__title">${query.title}</div>
+                      <div class="serp__url">${query.domain}</div>
+                    </a>
+                    <span class="serp__description">${query.description}</span>
+                  </div>
+                </#items>
+              </#list>
+            </section>
+          </div>
+      </#if>
+      <#if !eg??>
+        <div class="serp__no-results">
+          <p><strong>No search results were found</strong></p>
+          <p>Suggestions:</p>
+          <ul>
+            <li>Check that all words are spelled correctly.</li>
+            <li>Try different search terms.</li>
+            <li>Try a more general search.</li>
+            <li>Try fewer search terms.</li>
+          </ul>
+        </div>
+      </#if>
+      <#if pages !=0>
+        <div class="serp__pagination">
+          <ul>
+            <#if page != 1>
+            <li><a onclick="goBack(${page}, '${query}')" href="#"></a></li>
+            <#else>
+            <li><a class="serp__disabled"></a></li>
+            </#if>
+            <li><a <#if page==pages>class="serp__disabled"<#else>onclick="addPage(${page}, '${query}')"
+      </#if>href="#"></a></li>
+      </ul>
+    </div>
+    </#if>
+    <script src="/searchjs.js"></script>
+    <p class="footerP">Crawling and search engine created by Marc Andre Herpers using SERP</p>
+  </div>
