@@ -49,7 +49,7 @@ public final class MySQL {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			for (int i = 0; i < args.length; i++)
 				stmt.setString(i + 1, args[i]);
-			if (Boolean.parseBoolean(run.cfg.getString("debug")) == true)
+			if (Boolean.parseBoolean(App.cfg.getString("debug")) == true)
 				System.out.println(Prefix.MYSQL + stmt.toString());
 			return stmt.executeQuery();
 		} catch (Exception ex) {
@@ -63,7 +63,7 @@ public final class MySQL {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			for (int i = 0; i < args.length; i++)
 				stmt.setString(i + 1, args[i]);
-			if (Boolean.parseBoolean(run.cfg.getString("debug")) == true)
+			if (Boolean.parseBoolean(App.cfg.getString("debug")) == true)
 				System.out.println(Prefix.MYSQL + stmt.toString());
 			return stmt.execute();
 		} catch (Exception ex) {

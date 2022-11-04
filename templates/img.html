@@ -11,6 +11,8 @@
   <script src="https://code.jquery.com/jquery-3.6.1.min.js"
     integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="imgstyle.css">
+  <!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
 </head>
 
 <body>
@@ -105,11 +107,14 @@
             <li><a <#if page==pages>class="serp__disabled"<#else>onclick="addPage(${page}, '${query}')"
       </#if>href="#"></a></li>
       </ul>
+      <a class="github-button" href="https://github.com/MarcPlaying/webSearch" data-icon="octicon-star" aria-label="Star MarcPlaying/webSearch on GitHub">Star</a>
     </div>
+
     </#if>
    
     <script src="/searchimg.js"></script>
-    <p class="footerP">Crawling and search engine created by Marc Andre Herpers using SERP</p>
+    <p class="footerP">Crawling and search engine created by Marc Andre Herpers using SERP 
+      </p>
   </div>
   <div id="searchImgTh" class="hidden img-thumb">
     <img src="%img%" >

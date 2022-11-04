@@ -8,6 +8,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <meta name="author" value="vanGato">
+  <!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
 </head>
 
 <body>
@@ -52,10 +54,11 @@
       </div>
     </#if>
     <div class="serp__body">
-      <#if eg??>
+
         <div class="serp__main serp__results">
           <div class="serp__web">
             <span class="serp__label">Web Results</span>
+            <#if eg??>
             <section class="image-grid">
               <#list eg>
                 <#items as query>
@@ -68,9 +71,10 @@
                   </div>
                 </#items>
               </#list>
+              </#if>
             </section>
           </div>
-      </#if>
+
       <#if !eg??>
         <div class="serp__no-results">
           <p><strong>No search results were found</strong></p>
@@ -94,8 +98,25 @@
             <li><a <#if page==pages>class="serp__disabled"<#else>onclick="addPage(${page}, '${query}')"
       </#if>href="#"></a></li>
       </ul>
+
+      <a class="github-button" href="https://github.com/MarcPlaying/webSearch" data-icon="octicon-star" aria-label="Star MarcPlaying/webSearch on GitHub">Star</a>
     </div>
     </#if>
     <script src="/searchjs.js"></script>
+    <#if wiki??>
+    <div class="serp__sticky">
+      <div class="serp__headline">Wikipedia</div>
+      <div class="serp__wiki">
+        <h2>${wiki.title}</h2>
+        <p>${wiki.text}</p>
+        <img src="${wiki.image}" />
+        <p>A <b>web search engine</b> or <b>Internet search engine</b> is a software system that is designed to carry out <b>web search</b>.</p>
+        <p>
+        <small>
+          More about &raquo;Web search engine&laquo; from <a target="_blank" href="https://en.wikipedia.org/wiki/Web_search_engine">Wikipedia</a>
+        </small>
+        </p>
+      </div>
+      </#if>
     <p class="footerP">Crawling and search engine created by Marc Andre Herpers using SERP</p>
   </div>

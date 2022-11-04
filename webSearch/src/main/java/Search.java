@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import Classes.SearchItem;
+import Classes.Wiki;
+import Jwiki.Jwiki;
 import Utils.Prefix;
-import Utils.SearchItem;
 import freemarker.template.Template;
 import spark.Request;
 import spark.Response;
@@ -21,8 +23,18 @@ public class Search implements Route {
         int howManyPages = 0;
         int allQueries = 0;
         int page = 1;
+        try {
+            Jwiki jwiki = new Jwiki(req.queryParams("q"));
+            Wiki wiki = new Wiki();
+            wiki.setTitle(jwiki.getDisplayTitle());
+            wiki.setImage(jwiki.getImageURL());
+            wiki.setText(jwiki.getExtractText());
+            freeMap.put("wiki", wiki);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        if(req.queryParams("page") != null) {
+        if (req.queryParams("page") != null) {
             page = Integer.parseInt(req.queryParams("page"));
         }
         freeMap.put("page", page);
@@ -30,7 +42,7 @@ public class Search implements Route {
 
             if (req.queryParams("q") != null) {
                 freeMap.put("query", req.queryParams("q"));
-                
+
                 ResultSet countRs = MySQL.Query("SELECT * FROM `sites` WHERE `title` LIKE ?",
                         "%" + req.queryParams("q") + "%");
 
@@ -38,23 +50,24 @@ public class Search implements Route {
                     howManyPages++;
                     allQueries++;
                 }
-                if(howManyPages < 10 && howManyPages > 0) {
+                if (howManyPages < 10 && howManyPages > 0) {
                     howManyPages = 1;
-                }else{
+                } else {
                     howManyPages = Math.round(howManyPages / 10);
                 }
-                
+
                 freeMap.put("allQueries", allQueries);
                 ArrayList<SearchItem> items = new ArrayList<SearchItem>();
                 ResultSet searchRs = null;
-                if(page != 1) {
-                    searchRs = MySQL.Query("SELECT * FROM `sites` WHERE `title` LIKE ? LIMIT 10 OFFSET " + page * 10 + " ",
-                        "%" + req.queryParams("q") + "%");
-                }else{
+                if (page != 1) {
+                    searchRs = MySQL.Query(
+                            "SELECT * FROM `sites` WHERE `title` LIKE ? LIMIT 10 OFFSET " + page * 10 + " ",
+                            "%" + req.queryParams("q") + "%");
+                } else {
                     searchRs = MySQL.Query("SELECT * FROM `sites` WHERE `title` LIKE ? LIMIT 10",
-                        "%" + req.queryParams("q") + "%");
+                            "%" + req.queryParams("q") + "%");
                 }
-                
+
                 while (searchRs.next()) {
                     SearchItem item = new SearchItem();
                     item.setDescription(searchRs.getString("description"));
@@ -79,7 +92,7 @@ public class Search implements Route {
         System.out.println(Prefix.INFO + req.requestMethod() + ": \"" + req.pathInfo() + "\"");
 
         try {
-            Template templateFree = run.freemarkerCfg.getTemplate("search.html");
+            Template templateFree = App.freemarkerCfg.getTemplate("searchNew.html");
             Writer out = new StringWriter();
             templateFree.process(freeMap, out);
             ;

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import Classes.SearchItem;
 import Utils.Prefix;
-import Utils.SearchItem;
 import freemarker.template.Template;
 import spark.Request;
 import spark.Response;
@@ -76,7 +76,7 @@ public class Image implements Route {
         System.out.println(Prefix.INFO + req.requestMethod() + ": \"" + req.pathInfo() + "\"");
 
         try {
-            Template templateFree = run.freemarkerCfg.getTemplate("img.html");
+            Template templateFree = App.freemarkerCfg.getTemplate("img.html");
             Writer out = new StringWriter();
             templateFree.process(freeMap, out);
             ;

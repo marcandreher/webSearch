@@ -1,4 +1,4 @@
-package Utils;
+package Classes;
 
 public class SearchItem {
 
