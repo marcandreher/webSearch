@@ -1,3 +1,5 @@
+package Utils;
+
 
 
 import java.sql.Connection;
@@ -9,7 +11,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import Utils.Prefix;
 
 public final class MySQL {
 	private static Connection con = null;
@@ -49,7 +50,7 @@ public final class MySQL {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			for (int i = 0; i < args.length; i++)
 				stmt.setString(i + 1, args[i]);
-			if (Boolean.parseBoolean(App.cfg.getString("debug")) == true)
+			if (Boolean.parseBoolean(Config.getString("debug")) == true)
 				System.out.println(Prefix.MYSQL + stmt.toString());
 			return stmt.executeQuery();
 		} catch (Exception ex) {
@@ -63,7 +64,7 @@ public final class MySQL {
 			PreparedStatement stmt = con.prepareStatement(sql);
 			for (int i = 0; i < args.length; i++)
 				stmt.setString(i + 1, args[i]);
-			if (Boolean.parseBoolean(App.cfg.getString("debug")) == true)
+			if (Boolean.parseBoolean(Config.getString("debug")) == true)
 				System.out.println(Prefix.MYSQL + stmt.toString());
 			return stmt.execute();
 		} catch (Exception ex) {

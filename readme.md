@@ -3,7 +3,7 @@
   <br>
   <a href="/static/img/logo.png"><img src="/static/img/logo.png" alt="Markdownify" width="200"></a>
   <br>
-  Scampi Search
+  Scampi Search 2.0
   <br>
 </h1>
 
@@ -20,7 +20,7 @@
 
 * Image search
   - Instantly see all images of a crawled website.
-* [webCrawler](https://github.com/MarcPlaying/webCrawler/) Own open-source cralwer
+* Own integrated cralwer (2.0)
 * Nothing is crawled trough googles API
 * Database managment
 * Cross platform
@@ -31,22 +31,10 @@
 To clone and run this application, you'll need [Git](https://git-scm.com) and [Maven](https://maven.apache.org/) installed on your computer. From your command line:
 
 ```bash
-# Clone this repository
-$ git clone https://github.com/MarcPlaying/webCrawler
-
-# Clone the frontend
+# Clone the repository
 $ git clone https://github.com/MarcPlaying/webSearch
 
-# Go into the repository
-$ cd webCrawler
-
-# Install dependencies
-$ mvn install
-
-# Go back
-$ cd ../
-
-# Go to our Frontend
+# Go to our repository
 $ cd webSearch
 
 # Install dependencies

@@ -11,9 +11,9 @@ import org.json.simple.parser.JSONParser;
 
 public class Config {
 
-	public Object config = null;
-	public JSONObject objConfig = null;
-	private File configFile = null;
+	public static Object config = null;
+	public static JSONObject objConfig = null;
+	private static File configFile = null;
 
 	// I don't know why line 38 is unchecked the Type of the Map seems to be
 	// incorrect.
@@ -55,15 +55,15 @@ public class Config {
 		System.out.println(Prefix.INFO + "Sucessfully loaded config.json");
 	}
 
-	public String getString(String key) {
+	public static String getString(String key) {
 		return objConfig.get(key).toString();
 	}
 
-	public Boolean getBool(String key) {
+	public static Boolean getBool(String key) {
 		return Boolean.parseBoolean(objConfig.get(key).toString());
 	}
 
-	public int getInt(String key) {
+	public static int getInt(String key) {
 		return Integer.parseInt(objConfig.get(key).toString());
 	}
 }
